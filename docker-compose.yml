@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: notification_system
+    ports:
+      - "9090:3306"
+    volumes:
+      - ${PWD}/db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+    # command: bash -c "mysql -uroot -proot < db/seed.sql"
