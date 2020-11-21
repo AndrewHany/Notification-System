@@ -5,7 +5,8 @@
   "main": "server/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
+    "start": "cd src & npx sequelize-cli db:migrate & node server.js",
+    "startprod": "cd src && npx sequelize-cli db:migrate --env production && node server.js"
   },
   "keywords": [
     "node",
