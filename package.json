@@ -1,0 +1,27 @@
+{
+  "name": "notification-system",
+  "version": "1.0.0",
+  "description": "RESTful notification system APIs with NodeJs",
+  "main": "server/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "node",
+    "notification-system",
+    "notification",
+    "api"
+  ],
+  "author": "Andrew Hany",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5",
+    "sequelize-auto": "^0.7.2",
+    "sequelize-cli": "^6.2.0"
+  }
+}
