@@ -13,17 +13,24 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Notification.init({
-    id:
+  Notification.init(
     {
-      primaryKey: true,
-      type: DataTypes.INTEGER
+      id: {
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      text_en: DataTypes.TEXT,
+      text_ar: DataTypes.TEXT,
     },
-    text_en: DataTypes.TEXT,
-    text_ar: DataTypes.TEXT
-  }, {
-    sequelize,
-    modelName: 'Notification'
-  });
+    {
+      sequelize,
+      modelName: "Notification",
+      defaultScope: {
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    }
+  );
   return Notification;
 };

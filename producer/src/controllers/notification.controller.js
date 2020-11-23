@@ -1,6 +1,7 @@
 const db = require("../models");
 const Notification = db.Notification;
 const Op = db.Sequelize.Op;
+const producer = require("../producer.js");
 
 // Create and Save a new Notification
 exports.create = (req, res) => {};
@@ -18,6 +19,7 @@ exports.findAll = (req, res) => {
           err.message || "Some error occurred while retrieving notifications.",
       });
     });
+  producer.sendToQueue('test swvl rmq test');
 };
 
 // Find a single Notification with an id

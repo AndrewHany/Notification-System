@@ -9,7 +9,7 @@ const app = express();
 require("./routes/notification.routes")(app);
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`,
 };
 
 app.use(cors(corsOptions));
