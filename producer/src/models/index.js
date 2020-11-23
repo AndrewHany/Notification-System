@@ -37,4 +37,9 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.Subscriber.belongsToMany(db.Notification, { through: "SubscriberNotifications" });
+
+
+db.Notification.belongsToMany(db.Subscriber, { through: "SubscriberNotifications" });
+
 module.exports = db;

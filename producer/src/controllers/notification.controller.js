@@ -1,5 +1,6 @@
 const db = require("../models");
 const Notification = db.Notification;
+const Subscriber = db.Subscriber;
 const Op = db.Sequelize.Op;
 const producer = require("../producer.js");
 
@@ -8,8 +9,16 @@ exports.create = (req, res) => {};
 
 // Retrieve all Notifications from the database.
 exports.findAll = (req, res) => {
-
-  Notification.findAll()
+  const { userToken } = req.query;
+  const filter = userToken ? {
+    attributes: ['id', 'text_en', 'text_ar', 'type'],
+    where: {
+      "$Subscribers.userToken$": userToken,
+    },
+    include: [{ model: Subscriber, required: false, attributes:[] }]
+  }
+    : {};
+  Notification.findAll(filter)
     .then((data) => {
       res.send(data);
     })
@@ -19,18 +28,5 @@ exports.findAll = (req, res) => {
           err.message || "Some error occurred while retrieving notifications.",
       });
     });
-  producer.sendToQueue('test swvl application notification');
+  producer.sendToQueue("test swvl application notification");
 };
-
-// Find a single Notification with an id
-exports.findOne = (req, res) => {};
-
-// Update a Notification by the id in the request
-exports.update = (req, res) => {};
-
-// Delete a Notification with the specified id in the request
-exports.delete = (req, res) => {};
-
-// Delete all Notifications from the database.
-exports.deleteAll = (req, res) => {};
-

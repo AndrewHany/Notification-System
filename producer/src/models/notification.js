@@ -21,13 +21,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       text_en: DataTypes.TEXT,
       text_ar: DataTypes.TEXT,
+      type: DataTypes.STRING
     },
     {
       sequelize,
       modelName: "Notification",
       defaultScope: {
         attributes: {
-          exclude: ["createdAt"],
+          exclude: ["createdAt", "updatedAt"],
         },
       },
     }

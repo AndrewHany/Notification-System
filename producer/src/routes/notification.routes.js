@@ -43,8 +43,15 @@ module.exports = (app) => {
    * @swagger
    * /notifications:
    *  get:
-   *    summary: Retrieves all notifications
+   *    summary: Retrieves all notifications (can be filtered by userToken)
    *    tags: [Notifications]
+   *    parameters:
+   *      - in: query
+   *        name: userToken
+   *        schema:
+   *          type: string
+   *          required: false
+   *          description: userToken to retrieve all notifications to
    *    produces:
    *      - application/json
    *    responses:
@@ -58,15 +65,6 @@ module.exports = (app) => {
    *                $ref: '#/components/schemas/Notification'
    */
   router.get("/", notifications.findAll);
-
-  // Retrieve a single Notification with id
-  router.get("/:id", notifications.findOne);
-
-  // Delete a Notification with id
-  router.delete("/:id", notifications.delete);
-
-  // Delete all Notifications
-  router.delete("/", notifications.deleteAll);
 
   app.use("/api/notifications", router);
 };
