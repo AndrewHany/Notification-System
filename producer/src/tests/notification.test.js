@@ -7,18 +7,20 @@ describe("Notifications APIs", () => {
     const res = await request(app).get("/api/notifications");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toBeDefined();
-    expect(res.body).toHaveLength(2);
-    expect(res.body[0].text_en).toEqual("TEST ENGLISH TEXT");
     done();
   });
 
-  // Test create a new Notification
-
-  // Test retrieve a single Notification with id
-
-  // Test update a Notification with id
-
-  // Test delete a Notification with id
-
-  // Test delete all Notifications
+  it("should create a notification", async (done) => {
+    const res = await request(app)
+      .post("/api/notifications")
+      .send({
+        text_en: "Testing push notifications sms text",
+        text_ar: "اختبار الرسائل القصيرة SMS الإخطارات",
+        type: "PUSH",
+        usersTokens: ["0172hasdUzI1NiASCsInjasgl", "AEiQisfUzI1GaiIczxR5fCI"]
+      });
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toBeDefined();
+    done();
+  });
 });

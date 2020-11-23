@@ -24,7 +24,6 @@ exports.sendToQueue = (msg, users) => {
           persistent: true,
         });
 
-        console.log("Sent '%s'", queueMessage);
       });
     }
   );

@@ -155,7 +155,7 @@ module.exports = (app) => {
   // Retrieves all subscribers
   /**
    * @swagger
-   * /subscribers/{userToken}/notifications:
+   * /subscribers/{userToken}/pushnotifications:
    *  get:
    *    summary: Retrieves all subscriber push notifications
    *    tags: [Subscribers]
