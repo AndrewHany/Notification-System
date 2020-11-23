@@ -13,7 +13,7 @@
  *         properties:
  *           id:
  *             type: integer
- *             description: The auto-generated id of the Notification.
+ *             description: The auto-generated id of the subscriber.
  *           userToken:
  *             type: string
  *             description: The subscriber token.
@@ -40,6 +40,21 @@
  *            language: en
  *            phoneNumber: 01238336265
  *            isDeviceActive: true
+ *       SubscriberNotification:
+ *         type: object
+ *         required:
+ *           - id
+ *           - text
+ *         properties:
+ *           id:
+ *             type: integer
+ *             description: The auto-generated id of the Notification.
+ *           text:
+ *             type: string
+ *             description: The notification text in the preferred language
+ *         example:
+ *            id: 1
+ *            text: test notification text
  * */
 
 /**
@@ -136,6 +151,34 @@ module.exports = (app) => {
    */
 
   router.get("/", subscribers.findAll);
+
+  // Retrieves all subscribers
+  /**
+   * @swagger
+   * /subscribers/{userToken}/notifications:
+   *  get:
+   *    summary: Retrieves all subscriber push notifications
+   *    tags: [Subscribers]
+   *    parameters:
+   *      - in: path
+   *        name: userToken
+   *        schema:
+   *          type: string
+   *          required: true
+   *          description: userToken to retrieve all notifications to
+   *    produces:
+   *      - application/json
+   *    responses:
+   *      200:
+   *        description: subscribers
+   *        content:
+   *          application/json:
+   *            schema:
+   *              type: array
+   *              items:
+   *                $ref: '#/components/schemas/SubscriberNotification'
+   */
+  router.get("/:userToken/pushnotifications", subscribers.getPushNotifications);
 
   app.use("/api/subscribers", router);
 };

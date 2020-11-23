@@ -42,21 +42,7 @@ exports.create = async (req, res) => {
 
 // Retrieve all Notifications from the database.
 exports.findAll = (req, res) => {
-  const { userToken } = req.query;
-  // if api recieves a usertoken to filter on
-  const filter = userToken
-    ? {
-        // needs to select only main table columns to view
-        attributes: ["id", "text_en", "text_ar", "type"],
-        // nested association querying
-        where: {
-          "$Subscribers.userToken$": userToken,
-        },
-        // include relational table but don't select columns from it
-        include: [{ model: Subscriber, required: false, attributes: [] }],
-      }
-    : {};
-  Notification.findAll(filter)
+  Notification.findAll()
     .then((data) => {
       res.send(data);
     })

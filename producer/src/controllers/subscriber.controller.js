@@ -1,6 +1,8 @@
 const db = require("../models");
 const Subscriber = db.Subscriber;
+const Notification = db.Notification;
 const Op = db.Sequelize.Op;
+const { sequelize } = require("../models");
 
 // Create and Save a new subscriber
 exports.create = async (req, res) => {
@@ -55,6 +57,41 @@ exports.findAll = (req, res) => {
       res.status(500).send({
         error:
           err.message || "Some error occurred while retrieving subscribers.",
+      });
+    });
+};
+
+//Retreives all pushNotifications for a certain subscriber
+exports.getPushNotifications = async (req, res) => {
+  const { userToken } = req.params;
+
+  Notification.findAll({
+    attributes: [
+      // needs to select only main table columns to view
+      "id",
+      [
+        sequelize.literal(
+          '( SELECT IF (Subscribers.language = "en" , text_en, text_ar ))'
+        ),
+        "text",
+      ],
+    ],
+    where: {
+      // get only push notifications
+      type: "PUSH",
+      // nested association querying
+      "$Subscribers.userToken$": userToken,
+    },
+    // include relational table but don't select columns from it
+    include: [{ model: Subscriber, required: false, attributes: [] }],
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        error:
+          err.message || "Some error occurred while retrieving notifications.",
       });
     });
 };

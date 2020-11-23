@@ -88,15 +88,8 @@ module.exports = (app) => {
    * @swagger
    * /notifications:
    *  get:
-   *    summary: Retrieves all notifications (can be filtered by userToken)
+   *    summary: Retrieves all notifications
    *    tags: [Notifications]
-   *    parameters:
-   *      - in: query
-   *        name: userToken
-   *        schema:
-   *          type: string
-   *          required: false
-   *          description: userToken to retrieve all notifications to
    *    produces:
    *      - application/json
    *    responses:
