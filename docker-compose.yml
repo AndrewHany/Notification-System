@@ -10,20 +10,40 @@ services:
     ports:
       - "9090:3306"
     volumes:
-      - ${PWD}/db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ${PWD}/.db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
 
-  node:
-    container_name: 'app'
+  producer:
+    container_name: 'producer'
     build:
       context: .
-      dockerfile: 'Dockerfile'
+      dockerfile: './producer/Dockerfile'
     user: "node"
     volumes:
-      - ./:/home/node/app
+      - ./producer/:/home/node/app
     ports:
       - "8081:8081"
     depends_on:
       - db
+      - rabbitmq
     environment:
       WAIT_HOSTS: db:3306
+
+  consumer:
+    container_name: 'consumer'
+    build:
+      context: .
+      dockerfile: './consumer/Dockerfile'
+    user: "node"
+    volumes:
+      - ./consumer/:/home/node/app
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    container_name: 'rabbitmq'
+    image: "rabbitmq:3-management"
+    ports:
+      - 5672:5672
+      - 15672:15672
+
 
