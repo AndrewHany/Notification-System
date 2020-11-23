@@ -14,6 +14,18 @@
             "envFile": "${workspaceFolder}\\producer\\src\\config\\.development.env",
             "cwd": "${workspaceFolder}\\producer\\src\\",
             "program": "${workspaceFolder}\\producer\\src\\server.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch consumer",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "envFile": "${workspaceFolder}\\consumer\\src\\config\\.development.env",
+            "cwd": "${workspaceFolder}\\consumer\\src\\",
+            "program": "${workspaceFolder}\\consumer\\src\\server.js"
+
         }
     ]
 }

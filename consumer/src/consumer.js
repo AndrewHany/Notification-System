@@ -1,5 +1,5 @@
 const amqp = require("amqplib/callback_api");
-const translate = require("translate");
+const messageProcessor = require("./processor");
 
 exports.consume = () => {
   amqp.connect(`amqp://${process.env.RMQ_HOST}`, function (conError, connection) {
@@ -23,9 +23,9 @@ exports.consume = () => {
       console.log("Waiting for messages in %s", queue);
         
       channel.consume(queue, function (msg) {
-        let msgContent = msg.content.toString();
+        let msgContent = JSON.parse(msg.content);
         console.log("Received '%s'", msgContent);
-        
+        messageProcessor.processMessage(msgContent);
         setTimeout(function () {
           channel.ack(msg);
         }, 1000);
