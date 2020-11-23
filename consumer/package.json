@@ -1,0 +1,30 @@
+{
+  "name": "notification-system-consumer",
+  "version": "1.0.0",
+  "description": "RESTful notification consumer",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "cd src && cross-env NODE_ENV=development nodemon server.js",
+    "startprod": "cd src && cross-env NODE_ENV=production node server.js",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --maxWorkers=1 --detectOpenHandles"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/translate": "^6.0.4",
+    "@superset-ui/translation": "^0.14.23",
+    "amqplib": "^0.6.0",
+    "dotenv": "^8.2.0",
+    "translate": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.5.16",
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.9",
+    "cross-env": "^7.0.2",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
+  }
+}

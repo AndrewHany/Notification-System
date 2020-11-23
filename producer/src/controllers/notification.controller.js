@@ -19,7 +19,7 @@ exports.findAll = (req, res) => {
           err.message || "Some error occurred while retrieving notifications.",
       });
     });
-  producer.sendToQueue('test swvl rmq test');
+  producer.sendToQueue('test swvl application notification');
 };
 
 // Find a single Notification with an id
