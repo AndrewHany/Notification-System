@@ -6,7 +6,13 @@ const cors = require("cors");
 const db = require("./models");
 
 const app = express();
-require("./routes/notification.routes")(app);
+const fs = require("fs");
+
+fs.readdir("./routes", (err, files) => {
+  files.forEach((file) => {
+    require("./routes/" + file)(app);
+  });
+});
 
 var corsOptions = {
   origin: `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`,

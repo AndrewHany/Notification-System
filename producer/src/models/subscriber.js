@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Notification extends Model {
+  class Subscriber extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,24 +13,24 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Notification.init(
+  Subscriber.init(
     {
-      id: {
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-      },
-      text_en: DataTypes.TEXT,
-      text_ar: DataTypes.TEXT,
+      userToken: DataTypes.STRING,
+      deviceToken: DataTypes.STRING,
+      deviceType: DataTypes.STRING,
+      language: DataTypes.CHAR(2),
+      phoneNumber: DataTypes.STRING,
+      isDeviceActive: DataTypes.BOOLEAN,
     },
     {
       sequelize,
-      modelName: "Notification",
+      modelName: "Subscriber",
       defaultScope: {
         attributes: {
-          exclude: ["createdAt"],
+          exclude: ["createdAt", "updatedAt"],
         },
       },
     }
   );
-  return Notification;
+  return Subscriber;
 };

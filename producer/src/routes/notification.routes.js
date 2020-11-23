@@ -62,9 +62,6 @@ module.exports = (app) => {
   // Retrieve a single Notification with id
   router.get("/:id", notifications.findOne);
 
-  // Update a Notification with id
-  router.put("/:id", notifications.update);
-
   // Delete a Notification with id
   router.delete("/:id", notifications.delete);
 
