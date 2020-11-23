@@ -11,7 +11,6 @@ exports.create = async (req, res) => {
     //handling rollbacks with a transaction
     const result = await sequelize.transaction(async (t) => {
       const { usersTokens, ...notification } = req.body;
-
       if (!usersTokens || !notification || usersTokens.length == 0) {
         res.send(500).send("invalid input format or empty usersTokens array");
       }

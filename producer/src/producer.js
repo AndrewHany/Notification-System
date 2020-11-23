@@ -1,9 +1,10 @@
 const amqp = require("amqplib/callback_api");
 
 exports.sendToQueue = (msg, users) => {
-    amqp.connect(`amqp://${process.env.RMQ_HOST}`, function (conError, connection) {
-        
-        if (conError) {
+  amqp.connect(
+    `amqp://${process.env.RMQ_HOST}`,
+    function (conError, connection) {
+      if (conError) {
         throw conError;
       }
       connection.createChannel(function (createError, channel) {
@@ -24,12 +25,12 @@ exports.sendToQueue = (msg, users) => {
         });
 
         console.log("Sent '%s'", queueMessage);
-      });        
-    });
-}
+      });
+    }
+  );
+};
 
 function constructMessage(msg, subscribers) {
-  
   if (msg && subscribers && subscribers.length > 0) {
     // construct rabbitmq message with input message + users info
     return {
@@ -55,4 +56,4 @@ function constructMessage(msg, subscribers) {
         }),
     };
   }
-};
+}

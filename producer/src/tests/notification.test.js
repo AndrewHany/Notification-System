@@ -1,7 +1,6 @@
 const request = require("supertest");
 const app = require("../app.js");
 
-
 describe("Notifications APIs", () => {
   // Test retrieve all Notifications
   it("should show all notifications", async (done) => {

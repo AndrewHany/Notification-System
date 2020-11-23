@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.js');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.js");
 const cors = require("cors");
 const db = require("./models");
 
@@ -28,10 +28,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-  res.redirect('/api-docs')
+  res.redirect("/api-docs");
 });
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 
 module.exports = app;

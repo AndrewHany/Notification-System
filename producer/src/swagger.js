@@ -1,4 +1,4 @@
-const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerJsdoc = require("swagger-jsdoc");
 require("dotenv").config({ path: `./config/.${process.env.NODE_ENV}.env` });
 
 const options = {
@@ -17,7 +17,6 @@ const options = {
     ],
   },
   apis: ["./routes/*.js"],
-  
 };
 
 const specs = swaggerJsdoc(options);

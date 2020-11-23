@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("Subscribers", {
@@ -45,7 +45,7 @@ module.exports = {
         defaultValue: Sequelize.literal("NOW() ON UPDATE NOW()"),
       },
     });
-    
+
     await queryInterface.addConstraint("Subscribers", {
       fields: ["deviceType"],
       type: "check",
@@ -55,18 +55,18 @@ module.exports = {
       name: "Subscribers_deviceType_checkConstraint",
     });
 
-    await queryInterface.addConstraint('Subscribers', {
-      fields: ['language'],
-      type: 'check',
+    await queryInterface.addConstraint("Subscribers", {
+      fields: ["language"],
+      type: "check",
       where: {
-        language: ['en', 'ar']
+        language: ["en", "ar"],
       },
-      name:'Subscribers_language_checkConstraint'
+      name: "Subscribers_language_checkConstraint",
     });
-    
+
     await queryInterface.addConstraint("Subscribers", {
       fields: ["userToken", "deviceToken"],
-      type: 'unique'
+      type: "unique",
     });
 
     await queryInterface.bulkInsert("Subscribers", [
@@ -97,6 +97,6 @@ module.exports = {
     ]);
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Subscribers');
-  }
+    await queryInterface.dropTable("Subscribers");
+  },
 };
