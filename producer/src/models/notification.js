@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   };
   Notification.init(
     {
-      id: {
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-      },
       text_en: DataTypes.TEXT,
       text_ar: DataTypes.TEXT,
       type: DataTypes.STRING
@@ -26,9 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Notification",
+      updatedAt: false,
       defaultScope: {
         attributes: {
-          exclude: ["createdAt", "updatedAt"],
+          exclude: ["createdAt"],
         },
       },
     }
