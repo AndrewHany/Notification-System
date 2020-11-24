@@ -3,6 +3,7 @@ node_js:
   - "stable"
 services:
   - docker
+  
 script:
   - docker-compose up
 

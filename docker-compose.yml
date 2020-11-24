@@ -15,11 +15,8 @@ services:
   producer:
     container_name: 'producer'
     build:
-      context: .
-      dockerfile: './producer/Dockerfile'
+      context: ./producer
     user: "node"
-    volumes:
-      - ./producer/:/home/node/app
     ports:
       - "8081:8081"
     depends_on:
@@ -31,11 +28,8 @@ services:
   consumer:
     container_name: 'consumer'
     build:
-      context: .
-      dockerfile: './consumer/Dockerfile'
+      context: ./consumer
     user: "node"
-    volumes:
-      - ./consumer/:/home/node/app
     depends_on:
       - rabbitmq
 
