@@ -7,21 +7,17 @@ It's build with scalability in mind, so messages created are being produced on a
 ```sh
 docker-compose up
 ```
-### API docs
-The project apis are documented using swagger and shown using swagger-ui
-to access the api documentation
-- Run containers
-- Visit http://localhost:8081/ from browser 
-_[change port according to .env configuration]_
 
 ### Design and Architecture
 The notification system consists of a producer and a consumer, connected together using a rabbitmq instance
 
 ##### Architecture
 ![architecture](/.docs/arch.jpg?raw=true "Architecture")
+
 #### Database design
 ![database](/.docs/db.jpg?raw=true "Database")
 
+#### Services
 | service | description |
 | ------ | ------ |
 | Notification APIs | Handles requests and routing of notifications, adds messages to database and sends it forward to rabbitmq for consumers |
@@ -29,6 +25,31 @@ The notification system consists of a producer and a consumer, connected togethe
 | Consumer | Reads messages from rabbitmq, and send it forward to processor |
 | Processor | Constructs message for providers and handles translation |
 | Providers | Notifications providers (not implemented here, just a mock!) |
+
+#### APIs
+| method | api | description |
+| ------ | ------ |------|
+| POST | `api/notifications` | Creates and sends a new notification given userTokens list |
+| GET | `api/notifications` | Retrieves all notifications |
+| POST | `api/subscribers` | Creates a new subscriber + device |
+| POST | `api/subscribers/deactivate` | Deactivate a subscriber's device |
+| GET | `api/subscribers` | Retrieves all subscribers |
+| GET | `api/subscribers/{userToken}/pushNotifications` | Retrieves all subscriber push notifications using userToken |
+
+##### Detailed API docs - Swagger
+The project apis are documented using swagger and shown using swagger-ui
+to access the api documentation
+- Run containers
+- Visit http://localhost:8081/ from browser 
+_[change port according to .env configuration]_
+
+### Sample flow
+- Run containers
+- Add subscriber  ( _userToken: a,deviceToken: b_ ) `POST: api/subscribers/`
+- Add a new push Notification  (usersToken: [a], type: 'PUSH') `POST: api/notifications` ( _new notification is now linked with subscriber already added_)
+- Check Consumer logs for providers handling new message
+- Get subscriber notifications `GET: api/subscribers/{userToken}/pushnotifications`
+_response should contain newly created push notification_
 
 ### Tech
 
