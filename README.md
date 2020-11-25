@@ -1,7 +1,9 @@
 # Notification System
-
-This is a notification system implemented using NodeJs/Mysql/Sequelize/RabbitMq.
+>This is a notification system implemented using NodeJs/Mysql/Sequelize/RabbitMq.
 It's build with scalability in mind, so messages created are being produced on an queue, and there is sample model to consume the message queue, but there can be mulptiple consumers
+
+[![Build Status](https://travis-ci.com/AndrewHany/Notification-System.svg?branch=main)](https://travis-ci.com/AndrewHany/Notification-System)
+
 
 ### How to run
 ```sh
