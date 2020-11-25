@@ -79,3 +79,8 @@ to run api tests, write `npm test` inside the producer
    [Swagger]: <https://swagger.io/>
    [Jest]: <https://jestjs.io/>
    [Docker]: <https://www.docker.com/>
+
+License
+----
+
+MIT
