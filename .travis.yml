@@ -8,5 +8,6 @@ script:
   - docker-compose up -d
   - bash .travis.wait.sh
   - cd producer
+  - npm install
   - npm test
 
