@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cd src && npx sequelize-cli db:migrate && cross-env NODE_ENV=development nodemon server.js",
     "startprod": "cd src && npx sequelize-cli db:migrate --env production && cross-env NODE_ENV=production node server.js",
-    "test": "cd src && cross-env NODE_ENV=test jest --testTimeout=10000 --maxWorkers=1 --detectOpenHandles",
+    "test": "cd src && cross-env NODE_ENV=test jest --testTimeout=10000 --maxWorkers=1 --detectOpenHandles --forceExit",
     "pretest": "cd src && cross-env NODE_ENV=test npm run db:drop:test && cross-env NODE_ENV=test npm run db:create:test",
     "db:drop:test": "cd src && cross-env NODE_ENV=test npx sequelize-cli db:drop",
     "db:create:test": "cd src && cross-env NODE_ENV=test npx sequelize-cli db:create && npx sequelize-cli db:migrate"
